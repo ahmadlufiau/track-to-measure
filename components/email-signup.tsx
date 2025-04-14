@@ -2,68 +2,69 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { CheckCircle } from "lucide-react"
+import { CheckCircle, AlertCircle } from "lucide-react"
+import { subscribeToNewsletter } from "@/app/actions/newsletter"
 
 export function EmailSignup() {
   const [email, setEmail] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [error, setError] = useState("")
+  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+  const [isPending, startTransition] = useTransition()
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    // Basic client-side validation
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError("Please enter a valid email address")
+      setMessage({ type: "error", text: "Please enter a valid email address" })
       return
     }
 
-    setIsSubmitting(true)
-    setError("")
+    // Create FormData
+    const formData = new FormData()
+    formData.append("email", email)
 
-    // This is where you would integrate with MailerLite or ConvertKit
-    // For now, we'll simulate a successful submission
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+    // Use React's useTransition to handle the server action
+    startTransition(async () => {
+      const result = await subscribeToNewsletter(formData)
 
-      // Success
-      setIsSubmitted(true)
-      setEmail("")
-    } catch (err) {
-      setError("Failed to subscribe. Please try again.")
-    } finally {
-      setIsSubmitting(false)
-    }
+      if (result.success) {
+        setMessage({ type: "success", text: result.message })
+        setEmail("")
+      } else {
+        setMessage({ type: "error", text: result.message })
+      }
+    })
   }
 
   return (
     <div className="w-full">
-      {isSubmitted ? (
+      {message?.type === "success" ? (
         <div className="bg-emerald-50 p-4 rounded-lg flex items-center justify-center">
           <CheckCircle className="h-5 w-5 text-emerald-500 mr-2" />
-          <p className="text-emerald-700">Thanks for subscribing! Check your inbox soon.</p>
+          <p className="text-emerald-700">{message.text}</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
           <div className="flex-grow">
             <Input
               type="email"
+              name="email"
               placeholder="Your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="h-12 border-gray-300 focus:border-emerald-500 focus:ring focus:ring-emerald-200 focus:ring-opacity-50"
+              disabled={isPending}
             />
           </div>
           <Button
             type="submit"
             className="h-12 bg-emerald-600 hover:bg-emerald-700 text-white transition-colors duration-200"
-            disabled={isSubmitting}
+            disabled={isPending}
           >
-            {isSubmitting ? (
+            {isPending ? (
               <span className="flex items-center">
                 <svg
                   className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
@@ -87,7 +88,12 @@ export function EmailSignup() {
         </form>
       )}
 
-      {error && <p className="mt-2 text-red-500 text-sm">{error}</p>}
+      {message?.type === "error" && (
+        <div className="mt-2 flex items-center text-red-500 text-sm">
+          <AlertCircle className="h-4 w-4 mr-1" />
+          <p>{message.text}</p>
+        </div>
+      )}
     </div>
   )
 }
