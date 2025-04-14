@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react"
 const blogPosts = {
   "setup-google-tag-manager": {
     title: "How to Set Up Google Tag Manager",
-    date: "2023-05-15",
+    date: "March 14, 2025",
     content: `
       <h2>Introduction to Google Tag Manager</h2>
       <p>Google Tag Manager (GTM) is a free tag management system that allows you to manage and deploy marketing tags (snippets of code or tracking pixels) on your website without having to modify the code.</p>
@@ -33,7 +33,7 @@ const blogPosts = {
   },
   "install-ga4": {
     title: "Install GA4 on Your Website",
-    date: "2023-05-10",
+    date: "March 14, 2025",
     content: `
       <h2>Introduction to Google Analytics 4</h2>
       <p>Google Analytics 4 (GA4) is the latest version of Google Analytics. It uses a different data model than Universal Analytics and provides more comprehensive tracking across websites and apps.</p>
@@ -60,7 +60,7 @@ const blogPosts = {
   },
   "add-meta-pixel": {
     title: "Add Meta Pixel for Facebook Ads",
-    date: "2023-05-05",
+    date: "March 14, 2025",
     content: `
       <h2>Introduction to Meta Pixel</h2>
       <p>The Meta Pixel (formerly Facebook Pixel) is a piece of code that you place on your website to track visitor activity. It helps you understand the effectiveness of your Facebook and Instagram ads.</p>
@@ -88,7 +88,7 @@ const blogPosts = {
   },
   "google-ads-conversion": {
     title: "Google Ads Conversion Tracking Setup",
-    date: "2023-04-28",
+    date: "March 14, 2025",
     content: `
       <h2>Introduction to Google Ads Conversion Tracking</h2>
       <p>Google Ads conversion tracking helps you measure the results of your ad campaigns by tracking specific actions that users take on your website after clicking on your ads.</p>

@@ -6,37 +6,37 @@ const blogPosts = [
     title: "How to Set Up Google Tag Manager",
     description: "A step-by-step guide to implementing GTM on your website.",
     slug: "setup-google-tag-manager",
-    date: "2023-05-15",
+    date: "March 14, 2025",
   },
   {
     title: "Install GA4 on Your Website",
     description: "Learn how to migrate from Universal Analytics to GA4.",
     slug: "install-ga4",
-    date: "2023-05-10",
+    date: "March 14, 2025",
   },
   {
     title: "Add Meta Pixel for Facebook Ads",
     description: "Track conversions and optimize your Facebook ad campaigns.",
     slug: "add-meta-pixel",
-    date: "2023-05-05",
+    date: "March 14, 2025",
   },
   {
     title: "Google Ads Conversion Tracking Setup",
     description: "How to properly set up conversion tracking for Google Ads.",
     slug: "google-ads-conversion",
-    date: "2023-04-28",
+    date: "March 14, 2025",
   },
   {
     title: "Common Tracking Tag Issues and Solutions",
     description: "Troubleshoot the most common problems with marketing tags.",
     slug: "tracking-tag-issues",
-    date: "2023-04-20",
+    date: "March 14, 2025",
   },
   {
     title: "Marketing Tag Best Practices",
     description: "Optimize your tracking setup for better data collection.",
     slug: "tag-best-practices",
-    date: "2023-04-15",
+    date: "March 14, 2025",
   },
 ]
 
